@@ -19,18 +19,20 @@ button.TextScaled = true
 button.Font = Enum.Font.GothamSemibold
 button.Parent = LocalPlayer:WaitForChild("PlayerGui")
 
--- Notifications (Fixed StarterGui reference)
-spawn(function()
-    while true do
-        StarterGui:SetCore("SendNotification", {
-            Title = "RINGTA/notimportant MADE",
-            Text = "discord.gg/ringta",
-            Icon = "rbxassetid://99581962287910",
-            Duration = 5
-        })
-        task.wait(20)
-    end
+local success, result = pcall(function()
+    return StarterGui:GetCore("SendNotification")
 end)
+
+if success and result then
+    StarterGui:SetCore("SendNotification", {
+        Title = "RINGTA/notimportant MADE",
+        Text = "discord.gg/ringta",
+        Duration = 5
+    })
+else
+    warn("Notifications are not available in this environment.")
+end
+
 
 -- Functionality remains unchanged
 button.MouseButton1Click:Connect(function()
