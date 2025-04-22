@@ -2,6 +2,9 @@ local UserInputService = game:GetService("UserInputService")
 local Players = game:GetService("Players")
 local LocalPlayer = Players.LocalPlayer
 
+-- Define StarterGui before using it
+local StarterGui = game:GetService("StarterGui")
+
 -- Create a single button instance
 local button = Instance.new("TextButton")
 button.Name = "ClickButton"
@@ -16,7 +19,7 @@ button.TextScaled = true
 button.Font = Enum.Font.GothamSemibold
 button.Parent = LocalPlayer:WaitForChild("PlayerGui")
 
--- Notifications
+-- Notifications (Fixed StarterGui reference)
 spawn(function()
     while true do
         StarterGui:SetCore("SendNotification", {
@@ -28,7 +31,6 @@ spawn(function()
         task.wait(20)
     end
 end)
-
 
 -- Functionality remains unchanged
 button.MouseButton1Click:Connect(function()
